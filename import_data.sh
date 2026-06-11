@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Database credentials
-DB_HOST="localhost"
-DB_PORT="5432"
-DB_NAME="Fast_Food_Chains"
-DB_USER="postgres"
+DB_HOST="$DB_HOST"
+DB_PORT="$DB_PORT"
+DB_NAME="$DB_NAME"
+DB_USER="$DB_USER"
 
 # Load environment variables
 if [ -f .env ]; then
@@ -33,6 +32,11 @@ if [[ ! -f "$CSV_FILE" ]]; then
 fi
 
 # Run the psql \copy command
-psql -h "$DB_HOST" -p "$DB_PORT" -d "$DB_NAME" -U "$DB_USER" -c "\copy $TABLE_NAME FROM '$CSV_FILE' WITH CSV HEADER DELIMITER ',';"
+"$PSQL_PATH" \
+  -h "$DB_HOST" \
+  -p "$DB_PORT" \
+  -d "$DB_NAME" \
+  -U "$DB_USER" \
+  -c "\copy $TABLE_NAME FROM '$CSV_FILE' WITH CSV HEADER DELIMITER ',';"
 
 echo "Data import completed!"
