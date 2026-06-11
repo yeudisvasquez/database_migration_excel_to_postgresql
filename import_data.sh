@@ -22,13 +22,13 @@ echo "DB=$DB_NAME"
 
 # CSV path from environment variable
 if [[ -z "$CSV_FILE" ]]; then
-  echo "❌ CSV_FILE_PATH is not set"
-  exit 1
+    echo "❌ CSV_FILE_PATH is not set"
+    exit 1
 fi
 
 if [[ ! -f "$CSV_FILE" ]]; then
-  echo "❌ CSV file not found: $CSV_FILE"
-  exit 1
+    echo "❌ CSV file not found: $CSV_FILE"
+    exit 1
 fi
 
 # Run the psql \copy command
@@ -39,4 +39,16 @@ fi
   -U "$DB_USER" \
   -c "\copy $TABLE_NAME FROM '$CSV_FILE' WITH CSV HEADER DELIMITER ',';"
 
-echo "Data import completed!"
+if [ $? -ne 0 ]; then
+  echo "❌ ERROR: Data import failed!"
+  exit 1
+else
+    echo "Data import completed!"
+
+    echo "Checking row count..."
+    "$PSQL_PATH" \
+        -h "$DB_HOST" \
+        -d "$DB_NAME" \
+        -U "$DB_USER" \
+        -c "SELECT COUNT(*) FROM $TABLE_NAME;"
+fi
