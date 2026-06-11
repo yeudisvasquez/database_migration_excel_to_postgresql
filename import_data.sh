@@ -16,18 +16,18 @@ fi
 TABLE_NAME="sales"
 CSV_FILE="$CSV_FILE_PATH"
 
-echo "CSV_FILE=$CSV_FILE"
+echo "CSV_FILE=Top_50_Fast_Food_Chains_in_USA"
 echo "TABLE=$TABLE_NAME"
 echo "DB=$DB_NAME"
 
 # CSV path from environment variable
 if [[ -z "$CSV_FILE" ]]; then
-    echo "❌ CSV_FILE_PATH is not set"
+    echo "CSV_FILE_PATH is not set"
     exit 1
 fi
 
 if [[ ! -f "$CSV_FILE" ]]; then
-    echo "❌ CSV file not found: $CSV_FILE"
+    echo "CSV file not found: $CSV_FILE"
     exit 1
 fi
 
@@ -40,7 +40,7 @@ fi
   -c "\copy $TABLE_NAME FROM '$CSV_FILE' WITH CSV HEADER DELIMITER ',';"
 
 if [ $? -ne 0 ]; then
-  echo "❌ ERROR: Data import failed!"
+  echo "ERROR: Data import failed!"
   exit 1
 else
     echo "Data import completed!"
@@ -50,5 +50,5 @@ else
         -h "$DB_HOST" \
         -d "$DB_NAME" \
         -U "$DB_USER" \
-        -c "SELECT COUNT(*) FROM $TABLE_NAME;"
+        -c "SELECT COUNT(*) As Total_rows FROM $TABLE_NAME;"
 fi
