@@ -3,17 +3,23 @@
 # Database credentials
 DB_HOST="localhost"
 DB_PORT="5432"
-DB_NAME="Fast Food Chains"
+DB_NAME="Fast_Food_Chains"
 DB_USER="postgres"
 
 # Load environment variables
 if [ -f .env ]; then
-  export $(grep -v '^#' .env | xargs)
+    set -o allexport
+    source .env
+    set +o allexport
 fi
 
 # Target table and CSV file path
-TABLE_NAME="Top 50 Fast-Food Chains in USA"
+TABLE_NAME="sales"
 CSV_FILE="$CSV_FILE_PATH"
+
+echo "CSV_FILE=$CSV_FILE"
+echo "TABLE=$TABLE_NAME"
+echo "DB=$DB_NAME"
 
 # CSV path from environment variable
 if [[ -z "$CSV_FILE" ]]; then
