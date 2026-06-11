@@ -1,23 +1,51 @@
-Dataset Migration: Excel -> PostgreSQL
+Excel/CSV → PostgreSQL Automated Migration (Bash ETL Tool)
 
-This project demonstrates a complete data migration workflow, moving a dataset from Excel into PostgreSQL using command-line automation.
+This project is a lightweight ETL automation script that loads data from an Excel-exported CSV file into a PostgreSQL database using Bash and psql.
 
-Project Steps
-- Download a dataset in Excel format from Kaggle
-    - Top 50 Fast-Food Chains in USA
-- Convert the dataset to CSV for database compatibility
-- Design and create PostgreSQL tables that match the original dataset schema
-- Develop a Bash script (with shebang) to automate data import
-- Execute the script to load data into PostgreSQL
-- Validate the migration by verifying row counts and data integrity
+It simplifies repetitive data loading tasks by automating the import process and validation steps.
 
-Tools & Technologies
-- SQL (schema design and validation)
-- Bash scripting (automation)
-- PostgreSQL
-- Git (version control)
+What This Project Does
+This tool allows you to:
+- Load a CSV dataset into PostgreSQL automatically
+- Validate file existence before import
+- Execute \copy for fast bulk loading
+- Run a post-load row count check
+- Centralize configuration using .env
 
-### Environment Variables
+Requirements
+- PostgreSQL installed locally
+- psql available in system PATH
+- A created database and table schema
+- CSV file exported from Excel
+
+Tech Stack
+- SQL
+- Bash Scripting
+- PostgreSQL (psql, \copy)
+- Git & GitHub
+- CSV (Excel export format)
+
+Project Structure
+.
+├── import_data.sh      # ETL automation script
+├── .env                # Configuration file (not committed)
+├── README.md
+
+Environment Variables (.env)
 Create a `.env` file in the project root:
-CSV_FILE_PATH
-This file is ignored by Git.
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=your_database
+DB_USER=postgres
+DB_PASSWORD=your_password
+CSV_FILE_PATH=/path/to/your/file.csv
+PSQL_PATH=/path/to/psql (optional)
+TABLE_NAME=your_table
+
+Workflow
+1. Load environment variables from .env
+2. Validate CSV file path
+3. Connect to PostgreSQL
+4. Import data using \copy
+5. Run row count validation
+6. Display success or failure message
