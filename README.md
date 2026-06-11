@@ -16,3 +16,8 @@ Tools & Technologies
 - Bash scripting (automation)
 - PostgreSQL
 - Git (version control)
+
+### Environment Variables
+Create a `.env` file in the project root:
+CSV_FILE_PATH
+This file is ignored by Git.
