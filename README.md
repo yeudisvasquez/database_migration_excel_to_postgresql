@@ -1,15 +1,18 @@
-Dataset migration from Excel to PostgreSQL
+Dataset Migration: Excel -> PostgreSQL
 
-Steps:
-- Download Excel dataset from Kaggle
-- Format file to .csv
-- Create the database tables in PostgreSQL
-    - Tables must match original dataset
-- Write bash script shebang to import data to database
-- Execute script
-- Verify the imput
+This project demonstrates a complete data migration workflow, moving a dataset from Excel into PostgreSQL using command-line automation.
 
-Tools and Languages: 
-- SQL
-- Bash Scripting
-- Git version control
+Project Steps
+- Download a dataset in Excel format from Kaggle
+    - Top 50 Fast-Food Chains in USA
+- Convert the dataset to CSV for database compatibility
+- Design and create PostgreSQL tables that match the original dataset schema
+- Develop a Bash script (with shebang) to automate data import
+- Execute the script to load data into PostgreSQL
+- Validate the migration by verifying row counts and data integrity
+
+Tools & Technologies
+- SQL (schema design and validation)
+- Bash scripting (automation)
+- PostgreSQL
+- Git (version control)
